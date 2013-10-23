@@ -204,9 +204,7 @@ class OpenERP {
 		$msg->addParam(new xmlrpcval($this->password, "string"));/** password */
 		$msg->addParam(new xmlrpcval($relation, "string"));
 		$msg->addParam(new xmlrpcval("search", "string"));
-                if ($key==null) {
-                    $msg->addParam(new xmlrpcval($key, "array"));
-                }
+                $msg->addParam(new xmlrpcval($key, "array"));
                 
 		$resp = $client->send($msg);
                 if ($resp->faultCode()){
