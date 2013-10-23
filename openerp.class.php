@@ -166,7 +166,7 @@ class OpenERP {
 
 		}
 
-	function traverse_structure($ids) {
+	public function traverse_structure($ids) {
 
 		$return_ids = array();
 		$iterator = new RecursiveArrayIterator($ids);
@@ -218,22 +218,24 @@ class OpenERP {
                 }
 	}
 	
-	public function call_function($model,$function,$ids,$params) {
+        /** @return xmlrpcval value */
+	public function call_function($model,$function,$params) {
 
 		$client = new xmlrpc_client($this->server . "object");
 
 		$id_val = array();
 		$count = 0;
+                /*
 		foreach ($ids as $id)
 			$id_val[$count++] = new xmlrpcval($id, "int");
-			
+		*/
+                
 		$msg = new xmlrpcmsg('execute');
 		$msg->addParam(new xmlrpcval($this->database, "string"));
 		$msg->addParam(new xmlrpcval($this->uid, "int"));
 		$msg->addParam(new xmlrpcval($this->password, "string"));
 		$msg->addParam(new xmlrpcval($model, "string"));
 		$msg->addParam(new xmlrpcval($function, "string"));
-		$msg->addParam(new xmlrpcval($id_val, "array"));
 		
 		// Send parameter to function
 		foreach ($params as $param){
