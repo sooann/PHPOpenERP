@@ -2,8 +2,8 @@
 
     include_once('openerp.class.php');
     
-    $pricelist = "2";
-    $date = "2013-11-23";
+    $pricelist = "1";
+    $date = "2013-10-23";
     $qty = 1;
     $partner = 0;
 
@@ -39,6 +39,12 @@
         $price = $res->structmem($pricelist)->scalarval();
         echo ("Price: ".$price."<br />");
         
+        $pricelist_id = array($pricelist);
+        $res = $rpc->read($pricelist_id, null, "product.pricelist");
+        echo ("Pricelist: ");
+        print_r($res);
         echo "<br />";
+        echo "<br />";
+        
     }
 ?>
